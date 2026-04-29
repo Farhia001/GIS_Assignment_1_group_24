@@ -25,6 +25,22 @@ function runTask4() {
     alert("Task 4 aktiverad: En bild har lagts över kartan.");
     console.log("Task 4 aktiverad");
 }
-function runTask5() {
-    console.log("Task 5 aktiverad");
-}
+
+var markers = L.markerClusterGroup(); 
+var fuelLayer = L.geoJson(fuel, { 
+    onEachFeature: function (feature, layer) { 
+        layer.bindPopup(feature.properties.name); } 
+    }); 
+
+markers.addLayer(fuelLayer); 
+
+function runTask5() { 
+    if(map.hasLayer(markers)){ 
+        map.removeLayer(markers); 
+        console.log("Task 5 bort"); 
+    } 
+    else { 
+        map.addLayer(markers); 
+        console.log("Task 5 aktiverad");
+    } 
+};
