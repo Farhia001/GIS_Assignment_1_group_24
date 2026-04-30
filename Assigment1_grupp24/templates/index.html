@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GIS Web App - Assignment 1</title>
-=======
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIS Web App - Assigment 1</title>
@@ -17,27 +12,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"> 
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
      
+    <link rel="stylesheet" href="{{ url_for('static', filename='Leaflet.DonutCluster.css') }}">
 </head>
 <body>
-    <h1>GIS Web App - Assigment 1</h1>
     
-    <div class="button-container">
-       <button onclick="runTask1()">Task 1: Geometries</button>
-       <button onclick="runTask2()">Task 2: 5 Locations</button>
-       <button onclick="runTask3()">Task 3: Supermarkets</button>
-       <button onclick="runTask4()">Task 4: Image Overlay</button>
-       <button onclick="runTask5()">Task 5: Cluster</button> 
-    </div>
-    <div id="main-container" style="display: flex;">
-        <div id="map"></div>
->>>>>>> 31205e46cbbab44eb3bfe296385f850f07d7c1ef
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
 
 <h1>GIS Web App - Assignment 1</h1>
 
@@ -46,7 +24,8 @@
    <button onclick="runTask2()">Task 2: 5 Locations</button>
    <button onclick="runTask3()">Task 3: Supermarkets</button>
    <button onclick="runTask4()">Task 4: Image Overlay</button>
-   <button onclick="runTask5()">Task 5: Cluster</button>
+   <button onclick="runTask5()">Task 5: Marker Cluster</button>
+   <button onclick="runTask51()">Task 5.1: Donut Cluster</button> 
 </div>
 
 <div id="main-container" style="display:flex;">
@@ -59,23 +38,16 @@
         <h3>Information</h3>
         <div id="side-info">Klicka på en plats för info...</div>
     </div>
-<<<<<<< HEAD
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-
+    
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<script src="{{ url_for('static', filename='Leaflet.DonutCluster.js') }}"></script>     
+<script src="{{ url_for('static', filename='fuel.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-=======
-    
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    <script src="{{ url_for('static', filename='fuel.js') }}"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    
->>>>>>> 31205e46cbbab44eb3bfe296385f850f07d7c1ef
 </body>
 </html>

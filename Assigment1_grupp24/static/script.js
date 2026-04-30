@@ -344,6 +344,69 @@ function runTask4() {
     // Log to console for debugging
     console.log("Task 4 aktiverad");
 }
+
+
+
+var markers = L.markerClusterGroup();
+
+
+var fuelLayer = L.geoJson(fuel, {
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.name);
+    }
+});
+
+markers.addLayer(fuelLayer);
+
 function runTask5() {
-    console.log("Task 5 aktiverad");
+    if(map.hasLayer(markers)){
+        map.removeLayer(markers);
+        console.log("Task 5 bort");
+    } 
+    else {
+        map.addLayer(markers);
+        console.log("Task 5 aktiverad");
+        console.log();
+    }    
+}
+
+
+var donutMarkers = L.DonutCluster(
+    {
+        chunkedLoading: true
+    },
+    {
+        key: function(feature) {
+            return feature.properties.brand.toUpperCase();
+        },
+
+        arcColorDict: {
+            "CIRCLE K": "red",
+            "IDS": "purple",
+            "INGO": "brown",
+            "OKQ8": "green",
+            "PREEM": "blue",
+            "SHELL": "yellow",
+            "TANKA": "green",
+            "ST1": "orange"
+        },
+
+        style: {
+            size: 50
+        },
+
+        textContent: 'count'
+    }
+);
+
+donutMarkers.addLayer(fuelLayer);
+
+function runTask51() {
+    if (map.hasLayer(donutMarkers)) {
+        map.removeLayer(donutMarkers);
+        console.log("Task 5.1 borta");
+    } else {
+        map.addLayer(donutMarkers);
+        console.log("Task 5.1 aktiverad");
+    }
 }
