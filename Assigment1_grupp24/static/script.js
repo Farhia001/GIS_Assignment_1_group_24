@@ -212,11 +212,6 @@ function runTask4() {
     // Log to console for debugging
     console.log("Task 4 aktiverad");
 }
-
-// ======================================================
-// TASK 5 - Currently a placeholder function
-// ======================================================
 function runTask5() {
     console.log("Task 5 aktiverad");
-}
 }
