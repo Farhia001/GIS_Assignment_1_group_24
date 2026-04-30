@@ -185,6 +185,8 @@ function runTask3() {
             "<p>Check that the file is inside the <b>static</b> folder and that the file name is exactly:</p>" +
             "<p><b>supermarket.geojson</b></p>";
     });
+}
+
 // ======================================================
 // TASK 4: Image Overlay
 // Add an image overlay on the map for the Stockholm area
