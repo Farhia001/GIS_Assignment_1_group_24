@@ -33,6 +33,7 @@ function runTask2() {
 function runTask3() {
     // Log to console for debugging
     console.log("Task 3 aktiverad");
+    console.log("TEST CHANGE: This is a test log message to confirm Task 3 is running.");
     
     // Show loading message in the sidebar info panel
     document.getElementById("info-content").innerHTML =
