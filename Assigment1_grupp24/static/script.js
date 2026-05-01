@@ -163,7 +163,6 @@ function runTask2() {
 function runTask3() {
     // Log to console for debugging
     console.log("Task 3 aktiverad");
-    console.log("TEST CHANGE: This is a test log message to confirm Task 3 is running.");
     
     // Show loading message in the sidebar info panel
     document.getElementById("info-content").innerHTML =
@@ -348,50 +347,51 @@ function runTask4() {
 
 // ======================================================
 // TASK 5: Marker Cluster
-// 
 // ======================================================
 
+// Skapa ett marker cluster-lager
 var markers = L.markerClusterGroup();
 
-
+// Skapa Geojson-lager från fuel-data
 var fuelLayer = L.geoJson(fuel, {
     onEachFeature: function (feature, layer) {
         layer.bindPopup(feature.properties.name);
     }
 });
-
+// Lägg till Geojson-lagret i klustret
 markers.addLayer(fuelLayer);
 
+// Funktion för att visa/dölja klustret
 function runTask5() {
     if(map.hasLayer(markers)){
-        map.removeLayer(markers);
-        console.log("Task 5 bort");
+        map.removeLayer(markers); // tar bort från karta
+        console.log("Task 5 bort"); 
     } 
     else {
-        map.addLayer(markers);
+        map.addLayer(markers);// lägger till på karta
         console.log("Task 5 aktiverad");
-        console.log();
     }    
 }
 
 // ======================================================
-// TASK 5.1: Marker Cluster
-// 
+// TASK 5.1: Donut Cluster
 // ======================================================
-fuel.features = fuel.features.filter(f => f.properties && f.properties.brand);
 
+// Filtrera bort features utan brand
+fuel.features = fuel.features.filter(f => f.properties && f.properties.brand);
+// Ändrar brand properties till stor bokstav
 fuel.features.forEach(f => {
     f.properties.brand = f.properties.brand.toUpperCase();
 });
-
+// Skapa DonutCluster
 var donutMarkers = L.DonutCluster(
     {
         chunkedLoading: true
     },
     {
-        key: "brand",
+        key: "brand", // Väljer att grupper data utifrån deras brand värde
 
-        arcColorDict: {
+        arcColorDict: { // Färg för varje bensinbolag
             "CIRCLE K": "red",
             "IDS": "purple",
             "INGO": "brown",
@@ -404,27 +404,27 @@ var donutMarkers = L.DonutCluster(
         },
 
         style: {
-            size: 50
+            size: 50 // Storlek på donut-cirklar
         },
 
-        textContent: 'total'
+        textContent: 'total' // Visar totalt antal stationer i mitten
     }
 );
-
+// Loopa igenom Geojson och skapa markers
 fuel.features.forEach(function(feature) {
     var coordinate = feature.geometry.coordinates;
-    var marker = L.marker([coordinate[1], coordinate[0]]);
-    marker.feature = feature;
-    marker.bindPopup(feature.properties.name || "no name");
-    donutMarkers.addLayer(marker);
+    var marker = L.marker([coordinate[1], coordinate[0]]); // Skapa marker (lat, lng)
+    marker.feature = feature;  // Koppla feature-data till markern
+    marker.bindPopup(feature.properties.name || "no name"); // Visa namn på station vid klick eller "no name"
+    donutMarkers.addLayer(marker);  // Lägg till markern i klustret
 });
-
+// Funktion för att visa/dölja klustret
 function runTask51() {
     if (map.hasLayer(donutMarkers)) {
-        map.removeLayer(donutMarkers);
+        map.removeLayer(donutMarkers); // Funktion för att ta bort från karta
         console.log("Task 5.1 borta");
     } else {
-        map.addLayer(donutMarkers);
+        map.addLayer(donutMarkers); // Funktion för att lägg till på karta
         console.log("Task 5.1 aktiverad");
     }
 }
