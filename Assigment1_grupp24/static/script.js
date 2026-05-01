@@ -321,28 +321,26 @@ function runTask3() {
 // TASK 4: Image Overlay
 // Add an image overlay on the map for the Stockholm area
 // ======================================================
+// Variabel för att spara bildlagret
+var imageOverlayLayer = null;
+var imageOverlayAdded = false;
+
 function runTask4() {
-    // Define the geographic bounds for the image overlay
-    // Format: [[south, west], [north, east]]
     var imageBounds = [[59.25, 17.90], [59.45, 18.20]];
-    
-    // Path to the image file to display
     var imageUrl = 'static/stockholm.jpeg';
-    
-    // Add the image overlay to the map with specified bounds and opacity
-    L.imageOverlay(imageUrl, imageBounds, {
-        opacity: 0.5,           // Semi-transparent (0-1, where 1 is fully opaque)
-        interactive: true       // Allow interaction with the map beneath the image
-    }).addTo(map);   
-    
-    // Automatically adjust map view to fit the image bounds
-    map.fitBounds(imageBounds);
-    
-    // Show alert notification to user
-    alert("Task 4 aktiverad: En bild har lagts över kartan.");
-    
-    // Log to console for debugging
-    console.log("Task 4 aktiverad");
+
+    if (imageOverlayLayer && map.hasLayer(imageOverlayLayer)) {
+        map.removeLayer(imageOverlayLayer);
+        console.log("Task 4 borttagen");
+    } else {
+        imageOverlayLayer = L.imageOverlay(imageUrl, imageBounds, {
+            opacity: 0.5,
+            interactive: true
+        });
+        imageOverlayLayer.addTo(map);
+        map.fitBounds(imageBounds);
+        console.log("Task 4 aktiverad");
+    }
 }
 
 // ======================================================
