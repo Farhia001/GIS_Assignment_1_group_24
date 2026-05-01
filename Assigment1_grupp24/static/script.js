@@ -325,20 +325,31 @@ function runTask3() {
 var imageOverlayLayer = null;
 var imageOverlayAdded = false;
 
+// =============================
+// TASK 4: Toggle Image Overlay
+// =============================
+// Den här funktionen lägger till eller tar bort en bild (overlay) över Stockholm på kartan.
+// Första klick: bilden visas och kartan zoomar in på området.
+// Andra klick: bilden tas bort från kartan.
+// Funktionen fungerar som en "toggle" (på/av)
 function runTask4() {
+    // Definiera geografiska bounds för bilden (sydväst och nordost)
     var imageBounds = [[59.25, 17.90], [59.45, 18.20]];
+    // Ange sökvägen till bildfilen
     var imageUrl = 'static/stockholm.jpeg';
 
+    // Om bilden redan finns på kartan, ta bort den (toggle av)
     if (imageOverlayLayer && map.hasLayer(imageOverlayLayer)) {
         map.removeLayer(imageOverlayLayer);
         console.log("Task 4 borttagen");
     } else {
+        // Annars: skapa och lägg till bilden på kartan (toggle på)
         imageOverlayLayer = L.imageOverlay(imageUrl, imageBounds, {
-            opacity: 0.5,
-            interactive: true
+            opacity: 0.5,        // Halvgenomskinlig bild
+            interactive: true    // Tillåt interaktion med kartan under
         });
         imageOverlayLayer.addTo(map);
-        map.fitBounds(imageBounds);
+        map.fitBounds(imageBounds); // Zooma in på bildens område
         console.log("Task 4 aktiverad");
     }
 }
