@@ -345,7 +345,10 @@ function runTask4() {
     console.log("Task 4 aktiverad");
 }
 
-
+// ======================================================
+// TASK 5: Marker Cluster
+// 
+// ======================================================
 
 var markers = L.markerClusterGroup();
 
@@ -370,15 +373,22 @@ function runTask5() {
     }    
 }
 
+// ======================================================
+// TASK 5.1: Marker Cluster
+// 
+// ======================================================
+fuel.features = fuel.features.filter(f => f.properties && f.properties.brand);
+
+fuel.features.forEach(f => {
+    f.properties.brand = f.properties.brand.toUpperCase();
+});
 
 var donutMarkers = L.DonutCluster(
     {
         chunkedLoading: true
     },
     {
-        key: function(feature) {
-            return feature.properties.brand.toUpperCase();
-        },
+        key: "brand",
 
         arcColorDict: {
             "CIRCLE K": "red",
@@ -388,18 +398,25 @@ var donutMarkers = L.DonutCluster(
             "PREEM": "blue",
             "SHELL": "yellow",
             "TANKA": "green",
-            "ST1": "orange"
+            "ST1": "orange",
+            "UNKNOWN": "gray"
         },
 
         style: {
             size: 50
         },
 
-        textContent: 'count'
+        textContent: 'total'
     }
 );
 
-donutMarkers.addLayer(fuelLayer);
+fuel.features.forEach(function(feature) {
+    var coordinate = feature.geometry.coordinates;
+    var marker = L.marker([coordinate[1], coordinate[0]]);
+    marker.feature = feature;
+    marker.bindPopup(feature.properties.name || "no name");
+    donutMarkers.addLayer(marker);
+});
 
 function runTask51() {
     if (map.hasLayer(donutMarkers)) {
@@ -410,3 +427,4 @@ function runTask51() {
         console.log("Task 5.1 aktiverad");
     }
 }
+
