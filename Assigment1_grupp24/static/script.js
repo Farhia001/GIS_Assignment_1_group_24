@@ -364,7 +364,7 @@ var markers = L.markerClusterGroup();
 // Skapa Geojson-lager från fuel-data
 var fuelLayer = L.geoJson(fuel, {
     onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.name);
+        layer.bindPopup(feature.properties.name); // popup som visar namnet på bensinstationen
     }
 });
 // Lägg till Geojson-lagret i klustret
